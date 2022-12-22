@@ -27,6 +27,7 @@ CREATE TABLE SalidaProductos(
         ON DELETE CASCADE
 );
 
+-- Procedimiento que inserta productos
 DELIMITER $$
 	CREATE PROCEDURE InsertaProducto(CodigoProducto VARCHAR(30), Nombre VARCHAR(100), Categoria VARCHAR(30),
     PrecioProducto DOUBLE, Unidades INT)
@@ -38,6 +39,7 @@ DELIMITER $$
         END $$
 DELIMITER ;
 
+-- Procedimiento que elimina productos
 DELIMITER $$
 	CREATE PROCEDURE EliminaProducto(ID VARCHAR(30))
 		BEGIN
@@ -45,6 +47,7 @@ DELIMITER $$
         END $$
 DELIMITER ;
 
+-- Procedimiento que inserta registros en la tabla de entrada de productos
 DELIMITER $$
 	CREATE PROCEDURE InsertaEntrada(IdEntrada INT, FechaEntrada Date, IdProducto VARCHAR(30), UnidadesEntrantes INT)
     BEGIN
@@ -54,6 +57,7 @@ DELIMITER $$
     END $$
 DELIMITER ;
 
+-- Procedimiento que inserta registros en la tabla de salida de productos
 DELIMITER $$
 	CREATE PROCEDURE InsertaSalida(IdSalida INT, FechaSalida Date, IdProducto VARCHAR(30), CantidadSalida INT)
     BEGIN
@@ -63,6 +67,7 @@ DELIMITER $$
     END $$
 DELIMITER ;
 
+-- Procedimiento que actualiza productos
 DELIMITER $$
 	CREATE PROCEDURE Actualiza(Id VARCHAR(30), Nombre VARCHAR(30), Precio DOUBLE)
 		BEGIN
