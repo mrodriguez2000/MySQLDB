@@ -63,12 +63,6 @@ DELIMITER $$
     END $$
 DELIMITER ;
 
-CREATE TABLE Stock(
-	IdProducto VARCHAR(30) NOT NULL,
-    Unidades INT,
-    CONSTRAINT FK_Productos FOREIGN KEY(IdProducto) REFERENCES productos(IdProducto)
-);
-
 DELIMITER $$
 	CREATE PROCEDURE Actualiza(Id VARCHAR(30), Nombre VARCHAR(30), Precio DOUBLE)
 		BEGIN
