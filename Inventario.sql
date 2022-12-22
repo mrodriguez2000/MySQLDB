@@ -69,10 +69,6 @@ CREATE TABLE Stock(
     CONSTRAINT FK_Productos FOREIGN KEY(IdProducto) REFERENCES productos(IdProducto)
 );
 
-SELECT *FROM stock;
-
-ALTER TABLE stock ADD COLUMN Entradas INT, ADD Salidas INT, ADD StockTotal INT;
-
 DELIMITER $$
 	CREATE PROCEDURE Actualiza(Id VARCHAR(30), Nombre VARCHAR(30), Precio DOUBLE)
 		BEGIN
@@ -90,20 +86,6 @@ DELIMITER $$
 			END CASE;
 		END; $$
 DELIMITER ;
-DROP PROCEDURE Actualiza;
-DESCRIBE productos;
-SELECT *FROM productos;
-
-CREATE VIEW StockProductos AS SELECT productos.NombreProducto, productos.UnidadesExistencias, SUM(entradaproducto.UnidadesEntrantes) 
-AS CantidadTotalEntrante,
-SUM(salidaproductos.CantidadSalida) AS CantidadTotalSaliente, 
-(productos.UnidadesExistencias + IF(SUM(entradaproducto.UnidadesEntrantes) IS NULL, 0, SUM(entradaproducto.UnidadesEntrantes)) 
-- IF(SUM(salidaproductos.CantidadSalida) IS NOT NULL, SUM(salidaproductos.CantidadSalida), 0)) AS StockTotal
-FROM productos LEFT JOIN entradaproducto ON productos.IdProducto = entradaproducto.IdProducto LEFT JOIN salidaproductos
-ON productos.IdProducto = salidaproductos.IdProducto GROUP BY productos.NombreProducto;
-
-SELECT *FROM entradaproducto;
-SELECT *FROM salidaproductos;
 
 SELECT salidaproductos.IdProducto, productos.NombreProducto FROM salidaproductos INNER JOIN productos 
 ON salidaproductos.IdProducto = productos.IdProducto HAVING SUM(salidaproductos.CantidadSalida) > 10;
