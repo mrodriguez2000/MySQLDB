@@ -1,3 +1,4 @@
+CREATE DATABASE registros;
 Use registros;
 -- Procedimiento que actualiza el saldo de los usuarios
 DELIMITER $$
